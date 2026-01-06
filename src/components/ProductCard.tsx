@@ -4,7 +4,11 @@ import { memo } from 'react'
 const ProductCard: React.FC<ProductCardProps> = ({ product, setIsModalOpen, setSelectedProduct }) => {
   const handleClick = () => {
     setSelectedProduct(product)
-    setIsModalOpen(true)
+    setIsModalOpen(false)
+
+    setTimeout(() => {
+      setIsModalOpen(true)
+    }, 0)
   }
 
   return (
