@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import 'tailwindcss';
+@import 'tailwindcss/utilities';
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f5fa;
+}
+
+@layer components {
+  .no-spinner {
+    appearance: textfield;
+  }
+
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
