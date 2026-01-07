@@ -1,74 +1,126 @@
-# React + TypeScript + Vite
+# Shop Flow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+온라인 쇼핑몰 시뮬레이션 애플리케이션입니다. 상품을 탐색하고 구매할 수 있는 인터랙티브한 쇼핑 경험을 제공합니다.
 
-Currently, two official plugins are available:
+## 주요 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🛍️ **상품 목록**: 다양한 상품을 카드 형태로 표시
+- 💰 **잔액 관리**: 초기 잔액 100,000,000원으로 시작하는 가상의 지갑 시스템
+- 🛒 **구매 기능**: 상품 선택 후 수량 조절 및 구매 가능
+- 📱 **반응형 디자인**: 모던하고 직관적인 UI/UX
+- ⚡ **로딩 상태**: 스켈레톤 UI를 통한 부드러운 로딩 경험
+- 🔔 **알림 시스템**: SweetAlert2를 활용한 구매 성공/실패 알림
 
-## React Compiler
+## 기술 스택
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **프레임워크**: React 19.2.0
+- **언어**: TypeScript
+- **빌드 도구**: Vite (rolldown-vite)
+- **스타일링**: Tailwind CSS 4.1.18
+- **아이콘**: React Icons 5.5.0
+- **알림**: SweetAlert2 11.26.17
 
-## Expanding the ESLint configuration
+## 시작하기
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 사전 요구사항
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (v18 이상 권장)
+- npm 또는 yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 설치
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# 의존성 설치
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 개발 서버 실행
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# 개발 모드로 실행
+npm run dev
 ```
-# SoltSoft-Internship
+
+개발 서버가 실행되면 브라우저에서 `http://localhost:5173` (또는 표시된 포트)로 접속할 수 있습니다.
+
+### 빌드
+
+```bash
+# 프로덕션 빌드
+npm run build
+```
+
+### 미리보기
+
+```bash
+# 빌드된 앱 미리보기
+npm run preview
+```
+
+### 린팅
+
+```bash
+# ESLint 실행
+npm run lint
+```
+
+## 프로젝트 구조
+
+```
+shop-flow/
+├── src/
+│   ├── components/          # React 컴포넌트
+│   │   ├── Header.tsx       # 상단 헤더 (잔액 표시)
+│   │   ├── ProductCard.tsx  # 상품 카드 컴포넌트
+│   │   ├── ProductCardSkeleton.tsx  # 로딩 스켈레톤
+│   │   ├── Modal.tsx        # 구매 모달
+│   │   └── Icon.tsx         # 아이콘 컴포넌트
+│   ├── data/                # 데이터 파일
+│   │   ├── products.ts      # 상품 데이터
+│   │   └── index.ts        # 데이터 export
+│   ├── global/              # 전역 타입 정의
+│   │   └── types.ts         # TypeScript 타입
+│   ├── App.tsx              # 메인 앱 컴포넌트
+│   ├── main.tsx             # 앱 진입점
+│   └── index.css            # 전역 스타일
+├── public/                  # 정적 파일
+├── dist/                    # 빌드 출력 디렉토리
+└── package.json             # 프로젝트 설정 및 의존성
+```
+
+## 주요 컴포넌트
+
+### Header
+
+상단 헤더 컴포넌트로 현재 잔액을 표시합니다.
+
+### ProductCard
+
+개별 상품을 카드 형태로 표시하며, 클릭 시 구매 모달을 엽니다.
+
+### Modal
+
+상품 구매를 위한 모달 컴포넌트로, 수량 조절 및 구매 기능을 제공합니다.
+
+### ProductCardSkeleton
+
+로딩 중일 때 표시되는 스켈레톤 UI 컴포넌트입니다.
+
+## 사용 방법
+
+1. **상품 탐색**: 메인 페이지에서 추천 상품 목록을 확인합니다.
+2. **상품 선택**: 구매하고 싶은 상품 카드를 클릭합니다.
+3. **수량 조절**: 모달에서 +/- 버튼으로 수량을 조절합니다.
+4. **구매**: "구매하기" 버튼을 클릭하여 구매를 완료합니다.
+5. **잔액 확인**: 상단 헤더에서 현재 잔액을 확인할 수 있습니다.
+
+## 특징
+
+- **타입 안정성**: TypeScript를 사용하여 타입 안정성 보장
+- **성능 최적화**: React.memo를 활용한 컴포넌트 최적화
+- **모던 UI**: Tailwind CSS를 활용한 현대적인 디자인
+- **사용자 경험**: 부드러운 애니메이션과 피드백 제공
+
+## 라이선스
+
+이 프로젝트는 인턴십 프로젝트입니다.
